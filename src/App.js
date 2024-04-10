@@ -14,6 +14,7 @@ function App() {
       .then((response) => response.json())
       .then((json) => {
         setUsers(json.data);
+        console.log(json.data);
       })
       .catch((err) => {
         console.warn(err);
@@ -21,6 +22,7 @@ function App() {
       })
       .finally(() => {
         setIsLoading(false);
+        console.log();
       });
   }, []);
 
