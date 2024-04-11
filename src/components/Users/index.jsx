@@ -22,9 +22,9 @@ export const Users = ({ items, isLoading, searchValue, changeSearchValue }) => {
           {items
             .filter((u) => {
               const fullName = (u.first_name + ' ' + u.last_name).toLowerCase();
-              console.log(fullName)
               return (fullName.includes(searchValue.toLowerCase()) || u.email.toLowerCase().includes(searchValue.toLowerCase()));
             })
+            // when we have entered nothing, all users meet the filter criterion because the default empty substring "" is part of each user's string and is between each character of their string
             .map((u) => (
               <User key={u.id} {...u} />
             ))}
