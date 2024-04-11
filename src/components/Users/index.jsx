@@ -19,10 +19,11 @@ export const Users = ({ items, isLoading }) => {
         </div>
       ) : (
         <ul className="users-list">
-          {items.map(u => (<User key={u.id} { ... u } />))}
+          {items.map(u => (<User key={u.id} { ...u } />))}
         </ul>
       )}
       <button className="send-invite-btn">Send invitation</button>
     </>
   );
 };
+
