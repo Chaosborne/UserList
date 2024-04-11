@@ -8,13 +8,13 @@ import { Users } from "./components/Users";
 function App() {
   const [users, setUsers] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [searchValue, setSearchValue] = useState("");
 
   React.useEffect(() => {
     fetch("https://reqres.in/api/users")
       .then((response) => response.json())
       .then((json) => {
         setUsers(json.data);
-        console.log(json.data);
       })
       .catch((err) => {
         console.warn(err);
@@ -22,14 +22,16 @@ function App() {
       })
       .finally(() => {
         setIsLoading(false);
-        console.log();
       });
   }, []);
 
+  const changeSearchValue = (e) => {
+    setSearchValue(e.target.value);
+  };
+
   return (
     <div className="App">
-      {/* <Users /> is a ./components/Users/User.index.jsx/Users component */}
-      <Users items={users} isLoading={isLoading} />
+      <Users items={users} isLoading={isLoading} searchValue={searchValue} changeSearchValue={changeSearchValue} />
       {/* <Success /> */}
     </div>
   );
