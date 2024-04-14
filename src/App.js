@@ -8,6 +8,7 @@ import { Users } from "./components/Users";
 function App() {
   const [users, setUsers] = useState([]);
   const [invites, setInvites] = useState([]);
+  const [success, setSuccess] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const [searchValue, setSearchValue] = useState("");
 
@@ -32,23 +33,31 @@ function App() {
 
   const onClickInvite = (id) => {
     if (invites.includes(id)) {
-      setInvites((prev) => prev.filter((_id) => _id != id));
+      setInvites((prev) => prev.filter((_id) => _id !== id));
     } else {
       setInvites((prev) => [...prev, id]);
     }
   };
 
+  const onClickSendInvites = () => {
+    setSuccess(true);
+  };
+
   return (
     <div className="App">
-      <Users
-        items={users}
-        isLoading={isLoading}
-        searchValue={searchValue}
-        changeSearchValue={changeSearchValue}
-        invites={invites}
-        onClickInvite={onClickInvite}
-      />
-      {/* <Success /> */}
+      {success ? (
+        <Success count={invites.length} />
+      ) : (
+        <Users
+          items={users}
+          isLoading={isLoading}
+          searchValue={searchValue}
+          changeSearchValue={changeSearchValue}
+          invites={invites}
+          onClickInvite={onClickInvite}
+          onClickSendInvites={onClickSendInvites}
+        />
+      )}
     </div>
   );
 }
